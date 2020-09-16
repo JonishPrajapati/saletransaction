@@ -7,26 +7,29 @@ using SalesTransaction.Model;
 
 namespace SalesTransaction.Service.Service
 {
-    class ImplementService : ILoginService
+   public class ImplementService : ILoginService
     {
-
-        private DataAccessHelper _connection;
-
-        public ImplementService(DataAccessHelper _connection)
+        private SqlConnection conn;
+        private DataAccessHelper dah;
+        public ImplementService()
         {
-            this._connection = _connection;
+            this.dah = new DataAccessHelper();
+            this.conn = dah.SetConnection();
         }
-    
+
+
+     
          public dynamic GetLogin(MvUserLogin userLogin)
         {
+            
+                 //invoking connection method
 
-                var conn = _connection.SetConnection(); //invoking connection method
-                SqlCommand command = new SqlCommand(conn);
+                SqlCommand command = new SqlCommand("select u.username, u.password from [dbo].userlogin where" +
+                                       " u.username ='" + userLogin.UserName + "'AND" +
+                                       " u.password = '" + userLogin.Password + "' ", conn);
                 conn.Open();
                 command.CommandType = CommandType.Text;
-                command.CommandText = "select u.username, u.password from [dbo].userlogin where" +
-                                       " u.username ='"+userLogin.UserName+"'AND" +
-                                       " u.password = '"+userLogin.Password+"' ";
+                //command.CommandText = ;
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -42,13 +45,12 @@ namespace SalesTransaction.Service.Service
            
         }
 
-        public dynamic GetDetails(string data)
+        public dynamic GetDetails()
         {
-            var conn = _connection.SetConnection(); //invoking connection method
-            SqlCommand command = new SqlCommand(conn);
-            conn.Open();
+     
+            SqlCommand command = new SqlCommand("select * from [dbo].[UserLogin]", conn);
             command.CommandType = CommandType.Text;
-            command.CommandText = "select * from [dbo].[UserLogin]";
+            //command.CommandText = ;
             SqlDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
             {

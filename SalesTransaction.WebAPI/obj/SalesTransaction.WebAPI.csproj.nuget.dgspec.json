@@ -200,9 +200,6 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Aqore 2020\\Sales\\SalesTransaction.DataAccess\\SalesTransaction.DataAccess.csproj": {
-                "projectPath": "D:\\Aqore 2020\\Sales\\SalesTransaction.DataAccess\\SalesTransaction.DataAccess.csproj"
-              },
               "D:\\Aqore 2020\\Sales\\SalesTransaction.Model\\SalesTransaction.Model.csproj": {
                 "projectPath": "D:\\Aqore 2020\\Sales\\SalesTransaction.Model\\SalesTransaction.Model.csproj"
               },

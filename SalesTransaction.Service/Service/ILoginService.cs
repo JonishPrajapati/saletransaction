@@ -6,8 +6,8 @@ namespace SalesTransaction.Service.Service
 {
     public interface ILoginService
     {
-        public dynamic GetLogin(MvUserLogin userLogin);
-        public dynamic GetDetails(String data);
+       dynamic GetLogin(MvUserLogin userLogin);
+       dynamic GetDetails();
     }
 }
 

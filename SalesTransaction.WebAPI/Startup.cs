@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SalesTransaction.Service.Service;
 
 namespace SalesTransaction.WebAPI
 {
@@ -24,7 +25,9 @@ namespace SalesTransaction.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILoginService, ImplementService>();
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +38,10 @@ namespace SalesTransaction.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

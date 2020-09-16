@@ -9,15 +9,18 @@ namespace SalesTransaction.DataAccess
     public class DataAccessHelper
     {
 
+        public DataAccessHelper()
+        {
+
+        }
         //establishing connection
-        public dynamic SetConnection()
+        public SqlConnection SetConnection()
         {
             SqlConnection _connection = new SqlConnection("Data Source=10.6.0.246;" +
                                              "Initial Catalog=Jonish;" +
                                              "User ID=intern;" +
                                              "Password=intern001;" +
-                                             "TrustServerCertificate=False;" +
-                                             "Connection Timeout = 30");
+                                             "TrustServerCertificate=False");
             try {
                 if (_connection.State == ConnectionState.Closed)
                 {
