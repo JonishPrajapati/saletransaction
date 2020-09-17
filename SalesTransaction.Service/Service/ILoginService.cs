@@ -7,7 +7,7 @@ namespace SalesTransaction.Service.Service
     public interface ILoginService
     {
        dynamic GetLogin(MvUserLogin userLogin);
-       dynamic GetDetails();
+       dynamic GetDetails(string json);
     }
 }
 

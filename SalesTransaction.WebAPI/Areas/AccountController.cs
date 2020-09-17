@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesTransaction.Model;
 using SalesTransaction.Service.Service;
 using SalesTransaction.WebAPI.Base;
 using System;
@@ -11,25 +12,44 @@ namespace SalesTransaction.WebAPI.Areas
     public class AccountController : BaseController
     {
         private ILoginService _service;
-        public AccountController(ILoginService _service)
+        public AccountController(ILoginService service)
         {
-            this._service = _service; //defining depedency
+            _service = service; //defining depedency
 
         }
       
+        /*
+               action : api/account/userdetail
+               description: listing every details
+         */
         [HttpGet]
-        public ActionResult UserDetail()
+        public IActionResult UserDetail(string json)
         {
-            Console.WriteLine("userdetails");
-            //dynamic display = this._service.GetDetails();
-            return Ok("sdfsd");
+            var data = _service.GetDetails(json);
+            if(data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
         }
 
-        //[HttpGet]
-        //public string GetMthod()
-        //{
-        //    return ("service");
-        //}
+        [HttpGet]
+        public string GetMthod()
+        {
+            return ("service");
+        }
 
+        public IActionResult UserLogin([FromBody] MvUserLogin login)
+        {
+            var data = _service.GetLogin(login);
+            if(data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+        {
+
+        }
     }
 }

@@ -21,47 +21,49 @@ namespace SalesTransaction.Service.Service
      
          public dynamic GetLogin(MvUserLogin userLogin)
         {
-            
-                 //invoking connection method
 
-                SqlCommand command = new SqlCommand("select u.username, u.password from [dbo].userlogin where" +
-                                       " u.username ='" + userLogin.UserName + "'AND" +
-                                       " u.password = '" + userLogin.Password + "' ", conn);
-                conn.Open();
-                command.CommandType = CommandType.Text;
-                //command.CommandText = ;
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+
+            using (SqlConnection sql = new SqlConnection(conn.ToString()))
+            {
+                using (SqlCommand command = new SqlCommand("SpUserLoginCheck", sql))
                 {
-                    Console.WriteLine("user Exist");
-                return reader;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@UserName", userLogin.UserName));
+                    command.Parameters.Add(new SqlParameter("@Password", userLogin.Password));
+                    
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            Console.WriteLine("user Exist");
+                            return reader;
+                        }
+                        return null;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("no such user created");
-                    return null;
-                }
-            
-           
+            }           
         }
 
-        public dynamic GetDetails()
+        public dynamic GetDetails(string json)
         {
-     
-            SqlCommand command = new SqlCommand("select * from [dbo].[UserLogin]", conn);
-            command.CommandType = CommandType.Text;
-            //command.CommandText = ;
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (SqlConnection sql = new SqlConnection(conn.ToString()))
             {
-                Console.WriteLine("done");
-                return reader;
+                using (SqlCommand command = new SqlCommand("SpUserLoginSelByUser", sql))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@Json", json.ToString()));
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            Console.WriteLine("user Detail");
+                            return reader;
+                        }
+                        return null;
+                    }
+                }
             }
-            else
-            {
-                Console.WriteLine("faulty");
-                return null;
-            } 
         }
     }
 }
