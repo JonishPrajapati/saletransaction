@@ -8,17 +8,13 @@
     {{ errorMessage }}
   </mat-error>
 
-  <mat-form-field class="example-full-width">
-    <input matInput type="text" placeholder="User Name" formControlName="userName" required>
-  </mat-form-field>
+    <input matInput type="text" placeholder="User Name" formControlName="Username" required>
+    <input matInput type="password" placeholder="Password" formControlName="Password" required>
 
-  <mat-form-field class="example-full-width">
-    <input matInput type="password" placeholder="Password" formControlName="password" required>
-  </mat-form-field>
 
   <div class="example-full-width">
     <!-- [disabled]="!loginForm.valid" -->
-    <button mat-raised-button color="primary">Login</button>
+    <button mat-raised-button color="primary" type="submit">Login</button>
   </div>
 
 </form>

@@ -34,7 +34,8 @@ namespace SaleTransaction.Application.WebApi
                     {
                         builder.WithOrigins("http://localhost:5500",
                             "http://localhost:4200")
-                                .WithMethods("{POST}", "GET");
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
                     });
             });
 
