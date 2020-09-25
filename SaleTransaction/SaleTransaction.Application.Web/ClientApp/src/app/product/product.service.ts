@@ -13,4 +13,7 @@ export class ProductService {
     return this.api.post('product/productadd', json);
   }
 
+  getProduct(){
+    return this.api.get('product/productall');
+  }
 }

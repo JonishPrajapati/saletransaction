@@ -27,10 +27,8 @@ export class LoginComponent implements OnInit,AfterViewInit, OnDestroy {
     private snacbar: MatSnackBar
     ) { }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   ngOnInit() {
