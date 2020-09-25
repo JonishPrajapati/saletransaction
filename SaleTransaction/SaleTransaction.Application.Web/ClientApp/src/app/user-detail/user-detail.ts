@@ -1,4 +1,7 @@
 export interface MvUserDetail {
-    id: number,
-    Username: string
+    UserId: number,
+    Username: string,
+    Password: string,
+    InsertPersonId: number,
+    InsertDate: Date 
 }

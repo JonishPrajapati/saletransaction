@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit,AfterViewInit, OnDestroy {
     invalidForm: 'Data Must be required',
     invalidLogin: 'Invalid Username or Password'
   }
+  
   login: MvUserLogin = <MvUserLogin>{};
 
   constructor(public fb: FormBuilder,
@@ -51,8 +52,11 @@ export class LoginComponent implements OnInit,AfterViewInit, OnDestroy {
        this.loginService.getLogin(this.login).subscribe((res)=>{
          if(res){
            this.openSnackBar("login successfull", "");
-            console.log("login");
-            this.router.navigate(['/user-detail']);
+           console.log(this.login.Username);
+           console.log(this.login.Password);
+           console.log(res.UserId);
+           
+            this.router.navigate(['/user-detail',res.UserId]);
             
          }else{
            this.openSnackBar(this.errorMessageType.invalidLogin, "");

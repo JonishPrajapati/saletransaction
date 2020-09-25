@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiServiceService } from '../../core/services/ApiService.service'
@@ -8,7 +9,10 @@ import { ApiServiceService } from '../../core/services/ApiService.service'
 export class UserDetailService {
 
 constructor(private api: ApiServiceService) { }
-getUserDetail(UserId :any): Observable<any>{
-  return this.api.get('account/userdetail',{ json: JSON.stringify({UserId : UserId}) });
+getUserDetail(UserId): Observable<any>{
+  return this.api.get('/account/userdetail', new HttpParams().set('json', JSON.stringify(UserId)));
+}
+getAllUser(){
+    return this.api.get('account/alluser');
 }
 }

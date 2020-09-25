@@ -7,8 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { UserDetailComponent } from './user-detail/user-detail.component'
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'user-detail',
     loadChildren: () => import('./user-detail/user-detail.module').then(m => m.UserDetailModule)
+  },
+  {
+    path:'product-add',
+    loadChildren: () => import('./product/product.module').then(m=>m.ProductModule)
   }
 ]
 
@@ -28,9 +32,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

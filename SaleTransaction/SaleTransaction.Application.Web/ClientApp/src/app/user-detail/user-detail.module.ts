@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path:'',
     component: UserDetailComponent
-  }
+  },
+  
 ]
 @NgModule({
   imports: [

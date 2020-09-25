@@ -1,8 +1,8 @@
-<section>
-  <div class="example-button-row">
-    <button mat-raised-button color="primary">Show more users</button>
-  </div>
-</section>
+
+
+    <button mat-raised-button color="primary" (click) ='getAllUsers()'>Show more users</button>
+    
+
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -10,7 +10,7 @@
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
-  <ng-container matColumnDef="position">
+  <ng-container matColumnDef="UserId">
     <th mat-header-cell *matHeaderCellDef> ID </th>
     <td mat-cell *matCellDef="let element"> {{element.UserId}} </td>
   </ng-container>
@@ -20,7 +20,20 @@
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.Username}} </td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <ng-container matColumnDef="Password">
+    <th mat-header-cell *matHeaderCellDef> password </th>
+    <td mat-cell *matCellDef="let element"> {{element.Password}} </td>
+  </ng-container>
+  <ng-container matColumnDef="InsertPersonId">
+    <th mat-header-cell *matHeaderCellDef> Person </th>
+    <td mat-cell *matCellDef="let element"> {{element.InsertPersonId}} </td>
+</ng-container>
 
+<ng-container matColumnDef="InsertDate">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.InsertDate}} </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
