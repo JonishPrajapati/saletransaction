@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { MvProduct } from './product';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductService } from './product.service';

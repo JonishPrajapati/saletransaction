@@ -23,7 +23,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data :any,
               private fb: FormBuilder,
               private productService: ProductService,
-              public dialogRef: MatDialogRef<ProductFormComponent>,) { 
+              public dialogRef: MatDialogRef<ProductFormComponent>) { 
 
                 dialogRef.disableClose = true
                 this.action = data.action;
