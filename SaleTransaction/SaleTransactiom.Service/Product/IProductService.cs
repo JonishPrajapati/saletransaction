@@ -7,10 +7,9 @@ namespace SaleTransaction.Application.Service.Product
 {
    public interface IProductService
     {
-        dynamic AddProduct(MvProduct productItem);
+         dynamic AddProduct(MvProduct productItem);
         dynamic GetAllProductDetails();
-        dynamic UpdateProduct(int id);
-        dynamic DeleteProduct(int id);
-        dynamic GetProductDetail(string json);
+        dynamic UpdateProduct(MvProduct productItem);
+       
     }
 }

@@ -5,6 +5,7 @@ import { MvProduct } from './product';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductService } from './product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,10 @@ export class ProductComponent implements OnInit {
   errorMessage: string = null;
   displayedColumns: string[];
   dataSource: MvProduct[] = [];
-  constructor(  private router: ActivatedRoute,
+  selectedProduct: MvProduct = <MvProduct>{};
+  selection = new SelectionModel<MvProduct>(false, []);
+  
+  constructor( 
                 private productService: ProductService,
                 private dialog: MatDialog,
                 private snacbar: MatSnackBar) { 
@@ -31,25 +35,63 @@ export class ProductComponent implements OnInit {
     this.productService.getProduct().subscribe((response: any) =>{
       if(response && response.data){
         this.dataSource = response.data;
-        console.log("hello");
-        console.log(this.dataSource, "data");
-        
       }else{
         this.errorMessage = "No Data Available"
       }
     })
   }
-
+  
   productAdd(){
-    this.openDialog();
+    this.selection.clear();
+    this.selectedProduct = <MvProduct>{};
+    this.openDialog('Add');
   }
+  productEdit(){
+    this.openDialog('Edit');
+  }
+
   //creating dialog box for add and edit
-  openDialog(){
-    let dialogRef = this.dialog.open(ProductFormComponent, {data : {name: 'botman'}});
-    dialogRef.afterClosed().subscribe(result =>{
-      this.openSnackBar(result, "");
-    })
+  openDialog(action: string){
+      if(action === 'Edit' && !this.selection.hasValue()){
+        this.openSnackBar('Row has not been selected',"");
+        return;
+      }
+      const dialogRef = this.dialog.open(ProductFormComponent,{
+        data:{
+          action:action,
+          data: this.selectedProduct
+        }
+      });
+      dialogRef.afterClosed().subscribe((requestedRow) =>{
+        if(requestedRow){
+          this.selectedProduct = requestedRow;
+          if(action === 'Edit'){
+              this.productService.updateProduct(requestedRow).subscribe((updated)=>{
+                if(updated){
+                  console.log(this.selectedProduct);
+                  
+                  this.getAllProducts();
+                  this.openSnackBar('Product Successfully Updated',"");
+                }
+                else{
+                  this.getAllProducts();
+                  this.openSnackBar("Product couldn't be updated","")
+                }
+              })
+          }else{
+            this.productService.addProduct(requestedRow).subscribe(added =>{
+              this.getAllProducts();
+              this.openSnackBar('Product Successfully Addedd ','');
+            })
+          }
+        }
+      })
   }
+rowClick(e: any, row: MvProduct){
+  this.selectedProduct = {...row};
+  this.selection.toggle(row);
+}
+
 
   openSnackBar(message,action){
     this.snacbar.open(message, action,{

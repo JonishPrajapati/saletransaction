@@ -1,6 +1,6 @@
     <div class="product-container">
       <button mat-raised-button color="primary" (click) ='productAdd()'>Add</button> &nbsp;&nbsp;&nbsp;
-      <button mat-raised-button color="primary" (click) ='getAllUsers()'>Edit</button>
+      <button mat-raised-button color="primary" (click) ='productEdit()'>Edit</button>
     </div>
      
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -31,5 +31,5 @@
     </ng-container>
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr (click)='rowClick(row)' mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}" (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></tr>
     </table>

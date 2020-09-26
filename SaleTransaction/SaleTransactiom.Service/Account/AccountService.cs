@@ -71,5 +71,24 @@ namespace SaleTransaction.Application.Service.Account
             }
         }
 
+        public dynamic AllDetails()
+        {
+             using (var sql = _dah.GetConnection())
+            {
+                using (SqlCommand command = new SqlCommand("SpUserLoginSelAllUser", sql))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            Console.WriteLine("user Detail");
+                            return _dah.GetJson(reader);
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
     }
 }

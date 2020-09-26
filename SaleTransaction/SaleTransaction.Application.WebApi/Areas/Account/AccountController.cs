@@ -33,7 +33,6 @@ using SaleTransaction.Application.Service.Account;
         try
         {
             var data = _service.GetDetails(json);
-            Console.WriteLine(data);
             return Ok(data);
         }
         catch (Exception)
@@ -57,6 +56,20 @@ using SaleTransaction.Application.Service.Account;
 
             throw;
         }
+    }
+    [HttpGet]
+    public IActionResult AllUser()
+    {
+        try
+        {
+            var data = _service.AllDetails();
+            return Ok(data);
+        }
+        catch(Exception ex)
+        {
+            throw;
+        }
+       
     }
     }
 

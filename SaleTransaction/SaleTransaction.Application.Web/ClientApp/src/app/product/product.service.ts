@@ -16,4 +16,7 @@ export class ProductService {
   getProduct(){
     return this.api.get('product/productall');
   }
+  updateProduct(json: any):Observable<any>{
+    return this.api.put('product/productUpdate', json)
+  }
 }

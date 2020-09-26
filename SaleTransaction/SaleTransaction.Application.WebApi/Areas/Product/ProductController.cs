@@ -18,18 +18,50 @@ namespace SaleTransaction.Application.WebApi.Areas.Product
             _productService = productService;
         }
         [HttpPost]
-        public IActionResult productAdd(MvProduct product)
+        public IActionResult productAdd([FromBody] MvProduct product)
         {
             try
             {
-                _productService.AddProduct(product);
-                return (IActionResult)product;
+               var data =  _productService.AddProduct(product);
+               
+                return Ok(data);
             }
             catch(Exception ex)
             {
-                throw;
+                    throw;
             }
             
+        }
+
+
+        [HttpGet]
+        public IActionResult productAll()
+        {
+            try
+            {
+                var details = _productService.GetAllProductDetails();
+                return Ok(details);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        [HttpPut]
+        public IActionResult productUpdate([FromBody] MvProduct product)
+        {
+            try
+            {
+                var data = _productService.UpdateProduct(product);
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

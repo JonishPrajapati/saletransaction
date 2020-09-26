@@ -10,5 +10,6 @@ namespace SaleTransaction.Application.Service.Account
 
         dynamic GetLogin(MvUserLogin userLogin);
         dynamic GetDetails(string json);
+        dynamic AllDetails();
     }
 }

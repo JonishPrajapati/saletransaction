@@ -4,19 +4,17 @@ using SaleTransaction.Application.DataAccess;
 using SaleTransaction.Application.Model;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Net;
 using System.Text;
 
-namespace SaleTransaction.Application.Service.Product
+namespace SaleTransaction.Application.Service.Customer
 {
-    public class ProductService : IProductService
+    public class CustomerService : ICustomerService
     {
         private readonly string _connectionString;
         private DataAccessHelper _dah;
 
-        public ProductService(IConfiguration configuration)
+        public CustomerService(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
             if (_connectionString != null)
@@ -24,27 +22,27 @@ namespace SaleTransaction.Application.Service.Product
                 _dah = new DataAccessHelper(_connectionString);
             }
         }
-        public  dynamic AddProduct(MvProduct productItem)
-        {
 
-            var json = JsonConvert.SerializeObject(productItem);
+        public dynamic addCustomer(MvCustomer customer)
+        {
+            var json = JsonConvert.SerializeObject(customer);
             using (var sql = _dah.GetConnection())
             {
-                using (SqlCommand command = new SqlCommand("SpProductInsJson", sql))
+                using (SqlCommand command = new SqlCommand("SpCustomerInsJson", sql))
                 {
-                    command.CommandType = (System.Data.CommandType.StoredProcedure);;
-                    command.Parameters.Add(new SqlParameter("@json", json)); 
+                    command.CommandType = (System.Data.CommandType.StoredProcedure); ;
+                    command.Parameters.Add(new SqlParameter("@json", json));
                     command.ExecuteNonQuery();
-                    return productItem;
+                    return customer;
                 }
             }
         }
 
-        public dynamic GetAllProductDetails()
+        public dynamic GetCustomerDetails()
         {
             using (var sql = _dah.GetConnection())
             {
-                using (SqlCommand command = new SqlCommand("SpProductSelJson", sql))
+                using (SqlCommand command = new SqlCommand("SpCustomerSelJson", sql))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     using (var reader = command.ExecuteReader())
@@ -60,17 +58,17 @@ namespace SaleTransaction.Application.Service.Product
             }
         }
 
-        public dynamic UpdateProduct(MvProduct productItem)
+        public dynamic updateCustomer(MvCustomer customer)
         {
-            var json = JsonConvert.SerializeObject(productItem);
+            var json = JsonConvert.SerializeObject(customer);
             using (var sql = _dah.GetConnection())
             {
-                using (SqlCommand command = new SqlCommand("SpProductUpdJson", sql))
+                using (SqlCommand command = new SqlCommand("SpCustomerUpdJson", sql))
                 {
                     command.CommandType = (System.Data.CommandType.StoredProcedure); ;
                     command.Parameters.Add(new SqlParameter("@json", json));
                     command.ExecuteNonQuery();
-                    return productItem;
+                    return customer;
                 }
             }
         }
