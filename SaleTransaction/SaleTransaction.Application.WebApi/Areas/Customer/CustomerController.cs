@@ -10,8 +10,7 @@ using SaleTransaction.Application.WebApi.Base;
 
 namespace SaleTransaction.Application.WebApi.Areas.Customer
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     public class CustomerController : BaseController
     {
         private ICustomerService _customerService;
@@ -21,6 +20,12 @@ namespace SaleTransaction.Application.WebApi.Areas.Customer
             this._customerService = customerService;
         }
 
+
+        [HttpGet]
+        public string getresult()
+        {
+            return ("ok");
+        }
         [HttpPost]
         public IActionResult customerAdd([FromBody] MvCustomer customer)
         {
@@ -52,12 +57,11 @@ namespace SaleTransaction.Application.WebApi.Areas.Customer
 
         }
         [HttpPost]
-        public IActionResult productUpdate([FromBody] MvCustomer customer)
+        public IActionResult customerUpdate([FromBody] MvCustomer customer)
         {
             try
             {
                 var data = _customerService.updateCustomer(customer);
-
                 return Ok(data);
             }
             catch (Exception ex)

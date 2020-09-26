@@ -7,16 +7,16 @@ namespace SaleTransaction.Application.Model
 {
     public class MvCustomer
     {
-        public int customerId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
-        public string firstName { get; set; }
+        public string FirstName { get; set; }
         [Required]
-        public string middleName { get; set; }
+        public string MiddleName { get; set; }
         [Required]
-        public string lastName { get; set; }
+        public string LastName { get; set; }
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
         [Required]
-        public string gender { get; set; }
+        public string Gender { get; set; }
     }
 }
