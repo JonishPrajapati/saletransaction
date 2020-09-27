@@ -44,7 +44,7 @@ namespace SaleTransaction.Application.WebApi.Areas.Product
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }

@@ -8,12 +8,13 @@ namespace SaleTransaction.Application.Model
    public class MvProduct
     {
     
+        public int ProductId { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]
         public string ProductCategory { get; set; }  
         [Required]
-        public int Stock {  get; set; }
+        public int Stock { get; set; }
 
     }
     

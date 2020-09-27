@@ -36,7 +36,7 @@ namespace SaleTransaction.Application.WebApi.Areas.Customer
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
@@ -52,7 +52,7 @@ namespace SaleTransaction.Application.WebApi.Areas.Customer
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
@@ -66,7 +66,7 @@ namespace SaleTransaction.Application.WebApi.Areas.Customer
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
