@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.displayedColumns = ['ProductId', 'ProductName','ProductCategory','Stock'];
+    this.displayedColumns = ['ProductId', 'ProductName','ProductCategory','Stock', 'Rate'];
     this.getAllProducts();
   }
 
@@ -39,7 +39,9 @@ export class ProductComponent implements OnInit {
       }
     })
   }
-  
+  productRateAdd(){
+      this.openDialog('');
+  }
   productAdd(){
     this.selection.clear();
     this.selectedProduct = <MvProduct>{};

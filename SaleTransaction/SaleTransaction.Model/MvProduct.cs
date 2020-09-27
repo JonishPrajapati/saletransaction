@@ -15,6 +15,8 @@ namespace SaleTransaction.Application.Model
         public string ProductCategory { get; set; }  
         [Required]
         public int Stock { get; set; }
+        [Required]
+        public int Rate { get; set; }
 
     }
     

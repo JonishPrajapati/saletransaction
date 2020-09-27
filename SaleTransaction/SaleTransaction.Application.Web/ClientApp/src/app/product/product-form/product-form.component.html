@@ -27,6 +27,13 @@
            formControlName="Stock"
            [(ngModel)]="selectedProduct.Stock">
   </mat-form-field>
+  <br>
+  <mat-form-field class="mat-text">
+   <input matInput type="text" 
+          placeholder="Rate" 
+          formControlName="Rate"
+          [(ngModel)]="selectedProduct.Rate">
+ </mat-form-field>
   </form>
   <mat-dialog-actions>
     <button mat-button (click)='onSubmit()' [disabled]="!productForm.valid" >Add</button>

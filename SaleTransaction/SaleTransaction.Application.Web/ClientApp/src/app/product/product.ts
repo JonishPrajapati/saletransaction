@@ -3,4 +3,5 @@ export interface MvProduct {
     ProductName: string,
     ProductCategory: string,
     Stock: number
+    Rate: number
 }
